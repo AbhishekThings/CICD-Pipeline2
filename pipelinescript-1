@@ -1,0 +1,25 @@
+pipeline{
+    agent any
+        stages{
+            stage("source-code"){
+                steps{
+                    git "https://github.com/AbhishekThings/myweb.git"
+                }
+                
+            }
+            stage("Build"){
+                steps{
+                    sh "mvn clean package"
+                }
+            }
+            stage("deploy"){
+                steps{
+                    sshagent(['b8f7ab35-a462-4477-a0a9-a0fd70c2e412']) {
+                       sh "scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipeline-1/target/myweb-8.3.2.war ec2-user@3.83.249.129:/opt/apache-tomcat-9.0.70/webapps/"
+
+          
+                  }
+                }
+            }
+        }
+}
