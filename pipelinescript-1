@@ -15,7 +15,7 @@ pipeline{
             stage("deploy"){
                 steps{
                     sshagent(['Here you need to provide the ssh key generated syntax of your local server in which you need to deploy webapp']) {
-                       sh "scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipeline-1/target/myweb-8.3.2.war ec2-user@3.83.249.129:/opt/apache-tomcat-9.0.70/webapps/"
+                       sh "scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/pipeline-1/target/(Here you need to provide your war file name) ec2-user@Here you need to provide Public ip of your server in which app  must be deployed:/opt/apache-tomcat-9.0.70/webapps/"
 
           
                   }
